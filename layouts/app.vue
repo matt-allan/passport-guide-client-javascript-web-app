@@ -19,7 +19,8 @@
           <div v-else>
             <b-nav-item-dropdown right>
               <template v-slot:button-content>
-                Username <span class="caret"></span>
+                <span v-if="user">{{ user.name }} </span>
+                <span class="caret"></span>
               </template>
               <b-dropdown-item to="logout">Logout</b-dropdown-item>
             </b-nav-item-dropdown>
@@ -33,3 +34,17 @@
     </main>
   </div>
 </template>
+
+<script>
+import { mapActions, mapState } from 'vuex'
+
+export default {
+  computed: mapState(['user']),
+  mounted() {
+    this.fetchUser()
+  },
+  methods: {
+    ...mapActions(['fetchUser'])
+  }
+}
+</script>
